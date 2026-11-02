@@ -407,12 +407,41 @@
   // ----- Otherwise: build overlay -----
 
   var STYLE = [
-    "#unstuck-clg-overlay{position:fixed;inset:0;width:100vw;height:100vh;background:#000;color:#f2e6bf;font-family:'Playfair Display',Georgia,serif;z-index:2147483647;display:flex;align-items:center;justify-content:center;padding:24px;box-sizing:border-box;overflow:auto}",
+    "#unstuck-clg-overlay{position:fixed;inset:0;width:100vw;height:100vh;background:radial-gradient(ellipse at 30% 20%,#1a140a 0%,#000 60%);color:#f2e6bf;font-family:'Playfair Display',Georgia,serif;z-index:2147483647;overflow:auto;box-sizing:border-box}",
     "#unstuck-clg-overlay *{box-sizing:border-box}",
-    "#unstuck-clg-card{max-width:520px;width:100%;text-align:center}",
-    "#unstuck-clg-card .brand{font-family:'Inter','Helvetica Neue',Arial,sans-serif;letter-spacing:.35em;font-size:12px;color:#c9a86a;margin-bottom:16px;text-transform:uppercase}",
-    "#unstuck-clg-card h1{font-size:56px;line-height:1.05;margin:0 0 18px 0;color:#e6c774}",
-    "#unstuck-clg-card p.sub{font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:14px;line-height:1.55;color:#c9c1a3;margin:0 auto 28px auto;max-width:400px}",
+    "#unstuck-clg-drift{position:fixed;inset:0;overflow:hidden;pointer-events:none;opacity:.07;display:flex;flex-direction:column;justify-content:space-around;mask-image:linear-gradient(90deg,transparent,#000 20%,#000 80%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 20%,#000 80%,transparent)}",
+    "#unstuck-clg-drift div{white-space:nowrap;font-size:44px;letter-spacing:.08em;text-transform:uppercase;color:#e6c774;animation:clgDrift 90s linear infinite}",
+    "#unstuck-clg-drift div:nth-child(2){animation-direction:reverse;animation-duration:120s}",
+    "#unstuck-clg-drift div:nth-child(3){animation-duration:150s}",
+    "@keyframes clgDrift{from{transform:translateX(0)}to{transform:translateX(-50%)}}",
+    "#unstuck-clg-wrap{position:relative;min-height:100%;max-width:1180px;margin:0 auto;padding:72px 28px 48px;display:grid;grid-template-columns:1.25fr .9fr;gap:56px;align-items:center}",
+    ".clg-brand{font-family:'Inter','Helvetica Neue',Arial,sans-serif;letter-spacing:.35em;font-size:12px;color:#c9a86a;margin-bottom:16px;text-transform:uppercase}",
+    "#unstuck-clg-door h1{font-size:64px;line-height:1.02;margin:0 0 16px 0;color:#e6c774}",
+    ".clg-lede{font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:16px;line-height:1.6;color:#c9c1a3;margin:0 0 26px;max-width:520px}",
+    ".clg-chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:22px}",
+    ".clg-chip{font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:14px;color:#e8dcb6;background:rgba(201,168,106,.06);border:1px solid rgba(201,168,106,.28);padding:10px 14px;border-radius:999px;cursor:pointer;transition:all .18s ease;text-align:left}",
+    ".clg-chip:hover{border-color:#c9a86a;background:rgba(201,168,106,.14);transform:translateY(-1px)}",
+    ".clg-chip.on{background:#c9a86a;color:#0a0806;border-color:#c9a86a}",
+    "#unstuck-clg-path{display:none;border:1px solid rgba(201,168,106,.35);background:linear-gradient(180deg,rgba(201,168,106,.08),rgba(0,0,0,.4));border-radius:6px;padding:22px;animation:clgIn .35s ease}",
+    "#unstuck-clg-path.show{display:block}",
+    "@keyframes clgIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}",
+    ".clg-path-ey{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:.28em;color:#c9a86a;text-transform:uppercase;margin-bottom:12px}",
+    ".clg-courses{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}",
+    ".clg-course{position:relative;border:1px solid #3a2f18;background:#0b0a07;border-radius:4px;padding:14px 14px 14px 40px}",
+    ".clg-course:before{content:'\\1F512';position:absolute;left:13px;top:14px;font-size:14px;opacity:.75}",
+    ".clg-course b{display:block;font-size:17px;color:#f2e6bf;font-weight:600;margin-bottom:3px}",
+    ".clg-course span{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#8a7f5c}",
+    ".clg-ctas{display:flex;flex-wrap:wrap;gap:10px;align-items:center}",
+    ".clg-join{display:inline-block;padding:14px 22px;background:linear-gradient(90deg,#8a6a1e,#c9a86a,#8a6a1e);color:#0a0806;text-decoration:none;font-size:14px;letter-spacing:.24em;text-transform:uppercase;font-weight:600;border-radius:2px}",
+    ".clg-free{font-family:'Inter',sans-serif;font-size:14px;color:#e6c774;text-decoration:none;border-bottom:1px solid rgba(230,199,116,.4);padding-bottom:2px}",
+    ".clg-free:hover{border-color:#e6c774}",
+    ".clg-ladder{display:flex;gap:6px;margin-top:26px;font-family:'Inter',sans-serif;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#6d6346;flex-wrap:wrap;align-items:center}",
+    ".clg-ladder i{font-style:normal;color:#c9a86a}",
+    "#unstuck-clg-card{background:rgba(10,9,6,.85);border:1px solid #3a2f18;border-radius:6px;padding:34px 30px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}",
+    "#unstuck-clg-card h2{font-size:30px;margin:0 0 8px;color:#e6c774;font-weight:600}",
+    "#unstuck-clg-card p.sub{font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:14px;line-height:1.55;color:#c9c1a3;margin:0 0 22px}",
+    ".clg-new{font-family:'Inter',sans-serif;font-size:13px;color:#8a7f5c;margin-top:18px;text-align:center}",
+    ".clg-new a{color:#e6c774}",
     "#unstuck-clg-form{display:grid;gap:12px;text-align:left}",
     "#unstuck-clg-form .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}",
     "#unstuck-clg-form label{font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:11px;letter-spacing:.24em;color:#8a7f5c;text-transform:uppercase;display:block;margin-bottom:6px}",
@@ -425,10 +454,39 @@
     "#unstuck-clg-error.show{display:block}",
     "#unstuck-clg-admin-btn{position:absolute;top:18px;right:20px;background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.25);color:rgba(201,168,76,0.75);padding:7px 16px;border-radius:3px;cursor:pointer;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;transition:all 0.2s}",
     "#unstuck-clg-admin-btn:hover{border-color:rgba(201,168,76,0.6);color:#e6c774}",
-    "#unstuck-clg-admin-panel{display:none;max-width:340px;width:100%;margin:24px auto 0 auto;text-align:left;border-top:1px solid #3a2f18;padding-top:20px}",
+    "#unstuck-clg-admin-panel{display:none;width:100%;margin:24px auto 0 auto;text-align:left;border-top:1px solid #3a2f18;padding-top:20px}",
     "#unstuck-clg-admin-panel.show{display:block}",
-    "@media (max-width:520px){#unstuck-clg-card h1{font-size:40px}#unstuck-clg-form .row{grid-template-columns:1fr}}",
+    "@media (max-width:900px){#unstuck-clg-wrap{grid-template-columns:1fr;gap:32px;padding:64px 16px 40px}#unstuck-clg-door h1{font-size:44px}}",
+    "@media (max-width:520px){#unstuck-clg-door h1{font-size:38px}.clg-courses{grid-template-columns:1fr}.clg-join{width:100%;text-align:center;letter-spacing:.16em}#unstuck-clg-form .row{grid-template-columns:1fr}#unstuck-clg-card{padding:26px 18px}}",
+    "@media (prefers-reduced-motion:reduce){#unstuck-clg-drift div{animation:none}#unstuck-clg-path{animation:none}}",
   ].join("");
+
+  // ----- The Arena Door: a path for visitors who aren't members yet -----
+  // Every chip maps a real pain point to two real courses inside the Arena
+  // plus one free audit, so a non-member sees exactly what they'd unlock
+  // and gets a no-cost next step instead of a dead-end login wall.
+  var ALL_COURSES = ["Man in the Mirror","The Brotherhood Code","The Armor Check","The Watchfire Challenge","Kill the Lie","Father Wound Audit","Your Shame Armor","Burial Ritual","Legacy Vision Statement","Core Value Mappings","Your Queen Avatar","Best & Highest Use Inventory","The King\u2019s Blueprint","Marketplace Mission Map","The War Cry","Build a Tribe","Wisdom Compass","Watchtower Father","Trigger \u2260 Truth"];
+  var AUDITS = {
+    mirror:   { label: "Take the free Mirror Audit", url: "https://mirror.joinunstuck.com/" },
+    divorce:  { label: "Take the free Divorce Audit", url: "https://divorce.joinunstuck.com/" },
+    business: { label: "Take the free Business Audit", url: "https://audit.mrunstuck.com/" },
+    time:     { label: "Take the free 168-Hour Audit", url: "https://168.joinunstuck.com/" }
+  };
+  var PATHS = [
+    { chip: "I don\u2019t know who I really am anymore.", tier: "The Brotherhood \u2192 Unlearn", courses: [["Man in the Mirror","Brotherhood"],["Kill the Lie","Unlearn"]], audit: "mirror" },
+    { chip: "I\u2019m still performing for everyone.", tier: "The Brotherhood \u2192 Unlearn", courses: [["The Armor Check","Brotherhood"],["Your Shame Armor","Unlearn"]], audit: "mirror" },
+    { chip: "My father left a wound I never dealt with.", tier: "Unlearn \u2192 Tools", courses: [["Father Wound Audit","Unlearn"],["Watchtower Father","Tools"]], audit: "mirror" },
+    { chip: "I keep quitting on myself.", tier: "The Brotherhood \u2192 Tools", courses: [["The Watchfire Challenge","Brotherhood"],["Trigger \u2260 Truth","Tools"]], audit: "time" },
+    { chip: "I know my purpose but I\u2019m not living it.", tier: "Unlock", courses: [["Legacy Vision Statement","Unlock"],["Best & Highest Use Inventory","Unlock"]], audit: "time" },
+    { chip: "I\u2019m done being passive. I need to lead.", tier: "Unleash", courses: [["The King\u2019s Blueprint","Unleash"],["The War Cry","Unleash"]], audit: "time" },
+    { chip: "My marriage is breaking down.", tier: "Unlock \u2192 Free Audit", courses: [["Your Queen Avatar","Unlock"],["Core Value Mappings","Unlock"]], audit: "divorce" },
+    { chip: "My business is stuck.", tier: "Unleash", courses: [["Marketplace Mission Map","Unleash"],["Build a Tribe","Unleash"]], audit: "business" }
+  ];
+  function esc(t) {
+    return String(t).replace(/[&<>"]/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
+    });
+  }
 
   function getAdmins() {
     try {
@@ -468,11 +526,33 @@
 
     var overlay = document.createElement("div");
     overlay.id = "unstuck-clg-overlay";
+    var driftLine = ALL_COURSES.map(esc).join(" \u00b7 ") + " \u00b7 ";
+    driftLine = driftLine + driftLine;
+    var chipsHtml = PATHS.map(function (pth, i) {
+      return '<button type="button" class="clg-chip" data-path="' + i + '">\u201c' + esc(pth.chip) + '\u201d</button>';
+    }).join("");
     overlay.innerHTML =
-      '<button type="button" id="unstuck-clg-admin-btn">⚙ Admin</button>' +
+      '<div id="unstuck-clg-drift" aria-hidden="true"><div>' + driftLine + '</div><div>' + driftLine + '</div><div>' + driftLine + '</div></div>' +
+      '<button type="button" id="unstuck-clg-admin-btn">\u2699 Admin</button>' +
+      '<div id="unstuck-clg-wrap">' +
+      '<section id="unstuck-clg-door" aria-labelledby="unstuck-clg-door-h">' +
+      '  <div class="clg-brand">' + BRAND_TITLE + '</div>' +
+      '  <h1 id="unstuck-clg-door-h">Where are<br>you stuck?</h1>' +
+      '  <p class="clg-lede">' + ALL_COURSES.length + ' courses across four tiers, built for men who are done pretending. Pick the line that sounds like you and see the path waiting for you inside.</p>' +
+      '  <div class="clg-chips" role="group" aria-label="Pick what sounds like you">' + chipsHtml + '</div>' +
+      '  <div id="unstuck-clg-path" aria-live="polite">' +
+      '    <div class="clg-path-ey" id="unstuck-clg-path-ey">Your path</div>' +
+      '    <div class="clg-courses" id="unstuck-clg-path-courses"></div>' +
+      '    <div class="clg-ctas">' +
+      '      <a class="clg-join" target="_top" href="' + REQUEST_ACCESS_URL + '">Join the Brotherhood \u2192</a>' +
+      '      <a class="clg-free" id="unstuck-clg-path-audit" target="_blank" rel="noopener" href="#">Take a free audit first</a>' +
+      '    </div>' +
+      '  </div>' +
+      '  <div class="clg-ladder" aria-label="The four tiers"><i>Brotherhood</i>\u2192<i>Unlearn</i>\u2192<i>Unlock</i>\u2192<i>Unleash</i></div>' +
+      '</section>' +
       '<div id="unstuck-clg-card">' +
-      '  <div class="brand">' + BRAND_TITLE + '</div>' +
-      '  <h1>' + HEADLINE + '</h1>' +
+      '  <div class="clg-brand">Members</div>' +
+      '  <h2>' + HEADLINE.charAt(0) + HEADLINE.slice(1).toLowerCase().replace(/ the arena$/, " the Arena") + '</h2>' +
       '  <p class="sub">' + SUB + '</p>' +
       '  <div id="unstuck-clg-error"></div>' +
       '  <form id="unstuck-clg-form" autocomplete="on" novalidate>' +
@@ -501,6 +581,8 @@
       '    <input id="unstuck-clg-admin-pass" type="password" autocomplete="current-password" style="width:100%;padding:12px 14px;background:#0e0d0a;border:1px solid #3a2f18;border-radius:2px;color:#f2e6bf;font-family:Inter,sans-serif;font-size:14px;outline:none;margin-bottom:14px" />' +
       '    <button type="button" id="unstuck-clg-admin-submit" style="width:100%;padding:14px;background:transparent;border:1px solid rgba(201,168,76,0.4);color:#e6c774;font-family:Inter,sans-serif;font-size:12px;letter-spacing:.24em;text-transform:uppercase;cursor:pointer;border-radius:2px">Sign In →</button>' +
       '  </div>' +
+      '  <p class="clg-new">New here? <a href="#" id="unstuck-clg-new-link">Find your path first</a> or <a target="_top" href="' + REQUEST_ACCESS_URL + '">join the Brotherhood</a>.</p>' +
+      '</div>' +
       '</div>';
     document.body.appendChild(overlay);
     try { document.documentElement.style.visibility = "visible"; } catch (e) {}
@@ -671,12 +753,48 @@
       if (e.key === "Enter") tryAdminLogin();
     });
 
-    // Autofocus first field for good UX
-    setTimeout(function () {
-      try {
-        document.getElementById("unstuck-clg-first").focus();
-      } catch (e) {}
-    }, 50);
+    // Arena Door: reveal the matched (locked) path for a chosen pain point.
+    var chips = overlay.querySelectorAll(".clg-chip");
+    var pathBox = document.getElementById("unstuck-clg-path");
+    function showPath(i) {
+      var pth = PATHS[i];
+      if (!pth) return;
+      for (var c = 0; c < chips.length; c++) {
+        chips[c].classList.toggle("on", String(c) === String(i));
+        chips[c].setAttribute("aria-pressed", String(c) === String(i) ? "true" : "false");
+      }
+      document.getElementById("unstuck-clg-path-ey").textContent = "Your path \u00b7 " + pth.tier;
+      document.getElementById("unstuck-clg-path-courses").innerHTML = pth.courses.map(function (co) {
+        return '<div class="clg-course"><b>' + esc(co[0]) + '</b><span>' + esc(co[1]) + ' \u00b7 Inside the Arena</span></div>';
+      }).join("");
+      var au = AUDITS[pth.audit];
+      var auEl = document.getElementById("unstuck-clg-path-audit");
+      auEl.textContent = au.label + " \u2192";
+      auEl.href = au.url;
+      pathBox.classList.add("show");
+      if (window.innerWidth < 900) {
+        try { pathBox.scrollIntoView({ behavior: "smooth", block: "nearest" }); } catch (e) {}
+      }
+    }
+    for (var ci = 0; ci < chips.length; ci++) {
+      chips[ci].setAttribute("aria-pressed", "false");
+      chips[ci].addEventListener("click", function () { showPath(this.getAttribute("data-path")); });
+    }
+    document.getElementById("unstuck-clg-new-link").addEventListener("click", function (e) {
+      e.preventDefault();
+      try { document.getElementById("unstuck-clg-door").scrollIntoView({ behavior: "smooth" }); } catch (er) {}
+      if (chips[0]) chips[0].focus();
+    });
+
+    // Returning members: focus the form on wide screens. On phones we skip
+    // it so the keyboard doesn't cover the "Where are you stuck?" door.
+    if (window.innerWidth >= 900) {
+      setTimeout(function () {
+        try {
+          document.getElementById("unstuck-clg-first").focus();
+        } catch (e) {}
+      }, 50);
+    }
   }
 
   if (document.readyState === "loading") {
